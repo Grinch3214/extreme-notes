@@ -1,28 +1,95 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="wrapper">
+
+    <div class="wrapper-content">
+      <section>
+        <div class="container">
+          <h1 class="main-title">{{ title }}</h1>
+					<message-vue v-if="message" :message="message" />
+					<new-note :note="note" @addNewNote="addNote" />
+
+					<!-- note list -->
+					<div class="notes">
+						<div class="note" v-for="(note, index) in notes" :key="index">
+							<div class="note-header">
+								<p>{{ note.title }}</p>
+							</div>
+							<div class="note-body">
+								<p>{{ note.descr }}</p>
+								<span>{{ note.date }}</span>
+							</div>
+						</div>
+					</div>
+        </div>
+      </section>
+    </div>
+
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import MessageVue from "./components/MessageVue.vue";
+import NewNote from './components/NewNote.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+		MessageVue,
+    NewNote,
+  },
+	data:() => ({
+		title: 'Extreme notes',
+		message: null,
+		note: {
+			title: '',
+			descr: ''
+		},
+		notes: [
+			{
+				title: 'First note',
+				descr: 'Description for first note',
+				date: new Date(Date.now()).toLocaleString()
+			},
+			{
+				title: 'Second note',
+				descr: 'Description for second note',
+				date: new Date(Date.now()).toLocaleString()
+			},
+			{
+				title: 'Last note',
+				descr: 'Description for last note',
+				date: new Date(Date.now()).toLocaleString()
+			},
+		],
+	}),
+	methods: {
+		addNote() {
+			let { title, descr } = this.note;
+
+			if (title === '') {
+				this.message = 'Title can`t be blank'
+				return false
+			}
+
+			this.notes.push({
+				title,
+				descr,
+				date: new Date(Date.now()).toLocaleString()
+			});
+
+			this.message = null;
+			this.note.title = '',
+			this.note.descr = ''
+		}
+	},
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style lang="scss">
+.main-title {
+	font-size: 36px;
+	text-align: center;
+	margin-bottom: 40px;
+	letter-spacing: 2.5px;
 }
 </style>
