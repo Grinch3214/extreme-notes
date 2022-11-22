@@ -7,20 +7,8 @@
           <h1 class="main-title">{{ title }}</h1>
 					<message-vue v-if="message" :message="message" />
 					<new-note :note="note" @addNewNote="addNote" />
-
-					<!-- note list -->
-					<div class="notes">
-						<div class="note" v-for="(note, index) in notes" :key="index">
-							<div class="note-header">
-								<p>{{ note.title }}</p>
-							</div>
-							<div class="note-body">
-								<p>{{ note.descr }}</p>
-								<span>{{ note.date }}</span>
-							</div>
-						</div>
-					</div>
-        </div>
+					<notes-vue :notes="notes" @removeItem="removeNote" />
+				</div>
       </section>
     </div>
 
@@ -30,12 +18,14 @@
 <script>
 import MessageVue from "./components/MessageVue.vue";
 import NewNote from './components/NewNote.vue';
+import NotesVue from './components/NotesVue.vue';
 
 export default {
   name: 'App',
   components: {
 		MessageVue,
     NewNote,
+    NotesVue,
   },
 	data:() => ({
 		title: 'Extreme notes',
@@ -80,6 +70,9 @@ export default {
 			this.message = null;
 			this.note.title = '',
 			this.note.descr = ''
+		},
+		removeNote(index) {
+			this.notes.splice(index, 1);
 		}
 	},
 }
