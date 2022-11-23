@@ -9,14 +9,16 @@
 					</div>
 					<message-vue v-if="message" :message="message" />
 					<new-note :note="note" @addNewNote="addNote" />
-
-						<div class="note__icons">
-							<svg class="icons" :class="{ active: gridCards }" @click="gridCards = true">
-								<use xlink:href="@/icons/sprite.svg#columnIcon"></use>
-							</svg>
-							<svg class="icons" :class="{ active: !gridCards }" @click="gridCards = false">
-								<use xlink:href="@/icons/sprite.svg#gridIcon"></use>
-							</svg>
+						<div class="note__filter">
+							<search-vue />
+							<div class="note__icons">
+								<svg class="icons" :class="{ active: gridCards }" @click="gridCards = true">
+									<use xlink:href="@/icons/sprite.svg#columnIcon"></use>
+								</svg>
+								<svg class="icons" :class="{ active: !gridCards }" @click="gridCards = false">
+									<use xlink:href="@/icons/sprite.svg#gridIcon"></use>
+								</svg>
+							</div>
 						</div>
 
 					<notes-vue :notes="notes" :gridCards="gridCards" @removeItem="removeNote" />
@@ -31,6 +33,7 @@
 import MessageVue from "./components/MessageVue.vue";
 import NewNote from './components/NewNote.vue';
 import NotesVue from './components/NotesVue.vue';
+import SearchVue from './components/SearchVue.vue';
 
 export default {
   name: 'App',
@@ -38,6 +41,7 @@ export default {
 		MessageVue,
     NewNote,
     NotesVue,
+    SearchVue,
   },
 	data:() => ({
 		title: 'Extreme notes',
@@ -102,6 +106,12 @@ export default {
 	&__title {
 		font-size: 36px;
 		letter-spacing: 2.5px;
+	}
+
+	&__filter {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
 	}
 
 	&__icons {

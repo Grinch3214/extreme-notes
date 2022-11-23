@@ -14,4 +14,9 @@
 		<rect x="14" y="14" width="7" height="7"></rect>
 		<rect x="3" y="14" width="7" height="7"></rect>
 	</symbol>
+
+	<symbol id="searchIcon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+		<circle data-v-523093be="" cx="11" cy="11" r="8"></circle>
+		<line data-v-523093be="" x1="21" y1="21" x2="16.65" y2="16.65"></line>
+	</symbol>
 </svg>
