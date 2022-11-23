@@ -2,12 +2,24 @@
   <div class="wrapper">
 
     <div class="wrapper-content">
-      <section>
+      <section class="note">
         <div class="container">
-          <h1 class="main-title">{{ title }}</h1>
+					<div class="note__header">
+						<h1 class="note__title">{{ title }}</h1>
+					</div>
 					<message-vue v-if="message" :message="message" />
 					<new-note :note="note" @addNewNote="addNote" />
-					<notes-vue :notes="notes" @removeItem="removeNote" />
+
+						<div class="note__icons">
+							<svg class="icons" :class="{ active: gridCards }" @click="gridCards = true">
+								<use xlink:href="@/icons/sprite.svg#columnIcon"></use>
+							</svg>
+							<svg class="icons" :class="{ active: !gridCards }" @click="gridCards = false">
+								<use xlink:href="@/icons/sprite.svg#gridIcon"></use>
+							</svg>
+						</div>
+
+					<notes-vue :notes="notes" :gridCards="gridCards" @removeItem="removeNote" />
 				</div>
       </section>
     </div>
@@ -29,6 +41,7 @@ export default {
   },
 	data:() => ({
 		title: 'Extreme notes',
+		gridCards: true,
 		message: null,
 		note: {
 			title: '',
@@ -79,10 +92,32 @@ export default {
 </script>
 
 <style lang="scss">
-.main-title {
-	font-size: 36px;
-	text-align: center;
-	margin-bottom: 40px;
-	letter-spacing: 2.5px;
+.note {
+
+	&__header {
+		text-align: center;
+		margin-bottom: 40px;
+	}
+
+	&__title {
+		font-size: 36px;
+		letter-spacing: 2.5px;
+	}
+
+	&__icons {
+		text-align: right;
+		.icons {
+			fill: rgba(0,0,0,0);
+			stroke: #999999;
+			transition: all .3s ease;
+			cursor: pointer;
+			&.active {
+				stroke: #444ce0;
+			}
+		}
+		&>.icons + .icons {
+			margin-left: 15px;
+		}
+	}
 }
 </style>

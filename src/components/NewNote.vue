@@ -27,6 +27,7 @@ export default {
 <style lang="scss">
 .new-note {
 	text-align: center;
+	margin-bottom: 40px;
 	&__title, textarea {
 		font-family: 'Montserrat', sans-serif;
 	}

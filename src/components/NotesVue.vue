@@ -1,6 +1,11 @@
 <template>
 	<div class="notes">
-		<div class="notes__note" v-for="(note, index) in notes" :key="index">
+		<div 
+			class="notes__note"
+			v-for="(note, index) in notes"
+			:key="index"
+			:class="{ column: !gridCards }"
+		>
 			<div class="notes__note-head">
 				<h2>{{ note.title }}</h2>
 				<p class="notes__note-head-remove" @click="removeNote(index)"></p>
@@ -19,6 +24,9 @@ export default {
 		notes: {
 			type: Array,
 			default: []
+		},
+		gridCards: {
+			type: Boolean,
 		}
 	},
 	methods: {
@@ -42,6 +50,11 @@ export default {
 		background: #fff;
 		flex: 0 0 calc(50% - 10px);
 		border-radius: 10px;
+		transition: all .3s ease;
+		&.column {
+			flex-basis: 100%;
+			transition: all .3s ease;
+		}
 	}
 	&__note-head {
 		font-weight: 700;
@@ -53,8 +66,8 @@ export default {
 	}
 	&__note-head-remove {
 		position: absolute;
-		top: 15px;
-		right: 15px;
+		top: 3px;
+		right: 0;
 		width: 15px;
 		height: 15px;
 		cursor: pointer;
