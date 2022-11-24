@@ -8,7 +8,11 @@
 						<h1 class="note__title">{{ title }}</h1>
 					</div>
 					<message-vue v-if="message" :message="message" />
-					<new-note :note="note" @addNewNote="addNote" />
+					<new-note
+						:note="note"
+						@addNewNote="addNote"
+					/>
+
 						<div class="note__filter">
 
 							<search-vue
@@ -56,25 +60,34 @@ export default {
 		message: null,
 		note: {
 			title: '',
-			descr: ''
+			descr: '',
+			priority: 'low'
 		},
 		notes: [
 			{
 				title: 'First note',
 				descr: 'Description for first note',
-				date: new Date(Date.now()).toLocaleString()
+				date: new Date(Date.now()).toLocaleString(),
+				priority: 'low'
 			},
 			{
 				title: 'Second note',
 				descr: 'Description for second note',
-				date: new Date(Date.now()).toLocaleString()
+				date: new Date(Date.now()).toLocaleString(),
+				priority: 'medium'
 			},
 			{
 				title: 'Last note',
 				descr: 'Description for last note',
-				date: new Date(Date.now()).toLocaleString()
+				date: new Date(Date.now()).toLocaleString(),
+				priority: 'high'
 			},
 		],
+		priorities: [
+			{ title: 'low' },
+			{ title: 'medium' },
+			{ title: 'high' }
+		]
 	}),
 	computed: {
 		notesFilter() {
@@ -95,7 +108,7 @@ export default {
 	},
 	methods: {
 		addNote() {
-			let { title, descr } = this.note;
+			let { title, descr, priority } = this.note;
 
 			if (title === '') {
 				this.message = 'Title can`t be blank'
@@ -105,12 +118,14 @@ export default {
 			this.notes.push({
 				title,
 				descr,
+				priority,
 				date: new Date(Date.now()).toLocaleString()
 			});
 
 			this.message = null;
 			this.note.title = '',
-			this.note.descr = ''
+			this.note.descr = '',
+			this.note.priority = 'low'
 		},
 		removeNote(index) {
 			this.notes.splice(index, 1);

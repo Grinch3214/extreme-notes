@@ -4,7 +4,12 @@
 			class="notes__note"
 			v-for="(note, index) in notes"
 			:key="index"
-			:class="{ column: !gridCards }"
+			:class="{
+				column: !gridCards,
+				'low': note.priority === 'low',
+				'medium': note.priority === 'medium',
+				'high': note.priority === 'high'
+			}"
 		>
 			<div class="notes__note-head">
 				<h2>{{ note.title }}</h2>
@@ -12,8 +17,8 @@
 			</div>
 			<div class="notes__note-body">
 				<p>{{ note.descr }}</p>
-				<span>{{ note.date }}</span>
 			</div>
+			<p class="notes__note-date">{{ note.date }}</p>
 		</div>
 	</div>
 </template>
@@ -40,12 +45,13 @@ export default {
 <style lang="scss">
 .notes {
 	display: flex;
-	align-items: center;
 	flex-flow: wrap;
 	padding: 40px 0;
 	gap: 20px;
 	
 	&__note {
+		display: flex;
+    flex-flow: column;
 		padding: 20px;
 		background: #fff;
 		flex: 0 0 calc(50% - 10px);
@@ -87,13 +93,24 @@ export default {
 		}
 	}
 	&__note-body {
+		flex: 1;
 		&>p {
 			margin-bottom: 20px;
 		}
-		&>span {
-			font-size: 14px;
-			color: #999;
-		}
 	}
+
+	&__note-date {
+		font-size: 14px;
+		color: #999;
+	}
+}
+.low, .medium, .high {
+	border-left: 5px solid #26de81;
+}
+.medium {
+	border-color: #fed330;
+}
+.high {
+	border-color: #fc5c65;
 }
 </style>
