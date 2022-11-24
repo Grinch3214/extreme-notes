@@ -10,7 +10,11 @@
 			</div>
     </div>
     <!-- Search input -->
-    <input class="search-wrapper__input" type="text" :placeholder="placeholder" v-model="search"/>
+    <input
+			class="search-wrapper__input"
+			type="text" :placeholder="placeholder"
+			v-model="search"
+		/>
 
   </div>
 </template>
@@ -27,12 +31,13 @@ export default {
       default: 'Search'
     }
   },
-  data () {
-    return { search: this.value }
-  },
+	data() {
+		return {
+			search: this.value
+		}
+	},
   watch: {
     search (val) {
-      // console.log(val)
       this.$emit('search', val);
     }
   }

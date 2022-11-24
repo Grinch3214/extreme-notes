@@ -61,7 +61,7 @@ export default {
 		font-size: 20px;
 		color: #494ce8;
 		margin-bottom: 20px;
-		text-transform: uppercase;
+		// text-transform: uppercase;
 		position: relative;
 	}
 	&__note-head-remove {

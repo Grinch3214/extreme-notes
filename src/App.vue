@@ -10,7 +10,13 @@
 					<message-vue v-if="message" :message="message" />
 					<new-note :note="note" @addNewNote="addNote" />
 						<div class="note__filter">
-							<search-vue />
+
+							<search-vue
+								:value="search"
+								placeholder="Find note"
+								@search="search = $event"
+							/>
+
 							<div class="note__icons">
 								<svg class="icons" :class="{ active: gridCards }" @click="gridCards = true">
 									<use xlink:href="@/icons/sprite.svg#columnIcon"></use>
@@ -21,7 +27,7 @@
 							</div>
 						</div>
 
-					<notes-vue :notes="notes" :gridCards="gridCards" @removeItem="removeNote" />
+					<notes-vue :notes="notesFilter" :gridCards="gridCards" @removeItem="removeNote" />
 				</div>
       </section>
     </div>
@@ -45,6 +51,7 @@ export default {
   },
 	data:() => ({
 		title: 'Extreme notes',
+		search: '',
 		gridCards: true,
 		message: null,
 		note: {
@@ -69,6 +76,23 @@ export default {
 			},
 		],
 	}),
+	computed: {
+		notesFilter() {
+			let arr = this.notes;
+			let search = this.search;
+
+			if (!search) return arr;
+
+			search = search.trim().toLowerCase();
+
+			arr = arr.filter((item) => {
+				if (item.title.toLowerCase().indexOf(search) !== -1) {
+					return item
+				}
+			})
+			return arr;
+		}
+	},
 	methods: {
 		addNote() {
 			let { title, descr } = this.note;
