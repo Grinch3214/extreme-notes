@@ -115,7 +115,7 @@ export default {
 				return false
 			}
 
-			this.notes.push({
+			this.notes.unshift({
 				title,
 				descr,
 				priority,

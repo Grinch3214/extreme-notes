@@ -18,7 +18,12 @@
 			<div class="notes__note-body">
 				<p>{{ note.descr }}</p>
 			</div>
-			<p class="notes__note-date">{{ note.date }}</p>
+			<div class="notes__note-date">
+				<p>{{ note.date }}</p>
+				<svg class="icons">
+					<use xlink:href="@/icons/sprite.svg#editIcon"></use>
+				</svg>
+			</div>
 		</div>
 	</div>
 </template>
@@ -67,8 +72,8 @@ export default {
 		font-size: 20px;
 		color: #494ce8;
 		margin-bottom: 20px;
-		// text-transform: uppercase;
 		position: relative;
+		padding-right: 20px;
 	}
 	&__note-head-remove {
 		position: absolute;
@@ -100,8 +105,17 @@ export default {
 	}
 
 	&__note-date {
-		font-size: 14px;
-		color: #999;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		&>p {
+			font-size: 14px;
+			color: #999;
+		}
+		&>svg {
+			fill: #999;
+			cursor: pointer;
+		}
 	}
 }
 .low, .medium, .high {

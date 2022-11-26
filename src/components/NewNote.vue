@@ -65,7 +65,7 @@ export default {
 			padding: 5px 15px;
 			cursor: pointer;
 			border: 1px solid #303133;
-			border-radius: 10px;
+			border-radius: 20px;
 			margin-bottom: 0;
 			transition: all .3s ease;
 		}
