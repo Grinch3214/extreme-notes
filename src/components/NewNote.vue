@@ -62,12 +62,13 @@ export default {
 
 		label {
 			display: inline-block;
-			padding: 5px 15px;
+			padding: 1px 15px;
 			cursor: pointer;
 			border: 1px solid #303133;
 			border-radius: 20px;
 			margin-bottom: 0;
 			transition: all .3s ease;
+			overflow: hidden;
 		}
 
 		label + input + label {
@@ -78,6 +79,16 @@ export default {
 		label:hover {
 			background: #9a9a9a;
 			color: #fff;
+		}
+
+		#low:checked+label {
+			background: #26de81;
+		}
+		#medium:checked+label {
+			background: #fed330;
+		}
+		#high:checked+label {
+			background: #fc5c65;
 		}
 	}
 }

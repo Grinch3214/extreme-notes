@@ -127,6 +127,8 @@ export default {
 			this.note.descr = '',
 			this.note.priority = 'low'
 		},
+
+
 		removeNote(index) {
 			alert(`Delete ${this.notes[index].title}?`,this.notes.splice(index, 1));
 		}

@@ -21,7 +21,7 @@
 			<div class="notes__note-date">
 				<p>{{ note.date }}</p>
 				<svg class="icons">
-					<use xlink:href="@/icons/sprite.svg#editIcon"></use>
+					<use href="@/icons/sprite.svg#editIcon"></use>
 				</svg>
 			</div>
 		</div>
